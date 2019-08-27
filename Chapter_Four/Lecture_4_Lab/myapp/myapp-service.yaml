@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-blue-service
+spec:
+  selector:
+    app: myapp
+    version: blue
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8888
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-green-service
+spec:
+  selector:
+    app: myapp
+    version: green
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8888
+

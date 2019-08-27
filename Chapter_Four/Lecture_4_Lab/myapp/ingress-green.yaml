@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: green-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: / 
+spec:
+  rules:
+  - host: myapp.example.com
+    http:
+      paths:
+      - path: /green
+        backend:
+          serviceName: myapp-green-service
+          servicePort: 80
+
