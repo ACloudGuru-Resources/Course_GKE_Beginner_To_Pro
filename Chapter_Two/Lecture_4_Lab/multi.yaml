@@ -13,7 +13,7 @@ spec:
     - name: shared-data
       mountPath: /usr/share/nginx/html
   - name: ftp-container
-    image: fauria/vsftpd
+    image: almalinux:8
     volumeMounts:
     - name: shared-data
       mountPath: /pod-data
@@ -22,3 +22,4 @@ spec:
       value: admin
     - name: FTP_PASS
       value: password
+    command: ["/bin/bash", "-c", "tail -f /dev/null"]  # Keep the container running
