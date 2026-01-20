@@ -1,0 +1,75 @@
+[tool.poetry]
+name = "kubernetes-course"
+version = "0.1.0"
+description = "Kubernetes course project with testing infrastructure"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.8"
+tornado = "*"
+PyMySQL = "*"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.0.0"
+pytest-cov = "^4.0.0"
+pytest-mock = "^3.10.0"
+
+# Development commands
+# Use: poetry run pytest
+# Or:  poetry run pytest --no-cov  (to skip coverage)
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=Chapter_One",
+    "--cov=Chapter_Two", 
+    "--cov=Chapter_Three",
+    "--cov-report=html",
+    "--cov-report=xml",
+    "--cov-report=term-missing",
+    "--cov-fail-under=80",
+    "-v"
+]
+markers = [
+    "unit: marks tests as unit tests",
+    "integration: marks tests as integration tests",
+    "slow: marks tests as slow running tests"
+]
+
+[tool.coverage.run]
+source = ["Chapter_One", "Chapter_Two", "Chapter_Three"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*",
+    "*/env/*",
+    "*/.env/*",
+    "*/build/*",
+    "*/dist/*",
+    "*/.git/*",
+    "*/.pytest_cache/*",
+    "*/htmlcov/*",
+    "*/.coverage*",
+    "*/coverage.xml"
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 80
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
